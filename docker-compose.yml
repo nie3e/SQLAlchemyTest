@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:9.6
+    env_file:
+      - postgres.env
+    ports:
+      - "54321:5432"
