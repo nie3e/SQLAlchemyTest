@@ -2,6 +2,7 @@ import pytest
 from adapters import repository
 from domain import model
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 
 pytestmark = pytest.mark.usefixtures("mappers")
 
@@ -10,8 +11,8 @@ def insert_data_with_more_fields(
         session: Session, data: model.DataWithMoreFields
 ) -> None:
     session.execute(
-        "INSERT INTO data_with_more_fields(first_string, second_integer)"
-        "VALUES (:first_str, :second_int)",
+        text("INSERT INTO data_with_more_fields(first_string, second_integer)"
+        "VALUES (:first_str, :second_int)"),
         dict(first_str=data.first_str, second_int=data.second_int)
     )
 

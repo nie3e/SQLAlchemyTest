@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, clear_mappers
 
-from adapters.orm import start_mappers, metadata
+from adapters.orm import start_mappers, mapper_registry
 
 
 @pytest.fixture(scope="session")
@@ -24,8 +24,8 @@ def postgres_db():
     s = f"postgresql://{user}:{password}@localhost:54321/postgres"
     engine = create_engine(s, isolation_level="READ COMMITTED")
     engine.connect()
-    metadata.drop_all(engine, checkfirst=True)
-    metadata.create_all(engine)
+    mapper_registry.metadata.drop_all(engine, checkfirst=True)
+    mapper_registry.metadata.create_all(engine)
     return engine
 
 
