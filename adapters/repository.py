@@ -3,7 +3,7 @@ from typing import Union
 from domain import model
 
 
-class SqlALchemyReporitory:
+class SqlAlchemyRepository:
     def __init__(self, session):
         self.session = session
 

@@ -26,7 +26,7 @@ def db_teardown(postgres_session):
 
 
 def test_my_data_add_get_element(postgres_session):
-    repo = repository.SqlALchemyReporitory(postgres_session)
+    repo = repository.SqlAlchemyRepository(postgres_session)
     data = model.MyData(
         some_str="my text", some_float=3.14, some_int=5
     )
@@ -36,7 +36,7 @@ def test_my_data_add_get_element(postgres_session):
 
 
 def test_my_data_add_remove_element(postgres_session):
-    repo = repository.SqlALchemyReporitory(postgres_session)
+    repo = repository.SqlAlchemyRepository(postgres_session)
     data = model.MyData(
         some_str="my text2", some_float=3.14, some_int=5
     )
@@ -48,7 +48,7 @@ def test_my_data_add_remove_element(postgres_session):
 
 
 def test_data_with_more_fields_add_get_element(postgres_session):
-    repo = repository.SqlALchemyReporitory(postgres_session)
+    repo = repository.SqlAlchemyRepository(postgres_session)
     data = model.DataWithMoreFields(
         first_str="1st string", first_float=5.54, first_int=7,
         second_str="2nd string", second_int=9
@@ -70,7 +70,7 @@ def test_data_with_more_fields_get(postgres_session_factory):
     )
     session.commit()
     session.close()
-    repo = repository.SqlALchemyReporitory(postgres_session_factory())
+    repo = repository.SqlAlchemyRepository(postgres_session_factory())
 
     ret = repo.get_last_data_with_more_fields()
     assert ret == model.DataWithMoreFields(
